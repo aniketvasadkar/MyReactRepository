@@ -15,15 +15,7 @@ function App() {
     <div className="container mx-auto bg-secondary border border-primary rounded" >
 
         <LoginComponent testParam= {'Test Param value'} />
-        <ErrorHandler>
-            <PropsStateDemoComponent/>
-        </ErrorHandler>
 
-        <ErrorHandler>
-            <Timer/>
-         </ErrorHandler>
-
-        <Parent/>
 
     </div>
   );
