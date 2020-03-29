@@ -40,7 +40,7 @@ class Timer extends Component
             }
 
             return (
-                    <div className="container">
+                    <div className="">
                     <h1>{this.state.counter}</h1>
 
                     <div className="btn-group">

@@ -1,8 +1,6 @@
 import React , {Component}  from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-
 import Timer from '../propsstatedemo/Timer'
 import Parent from '../childtoparentdata/Parent'
 import ErrorHandler from '../errors/ErrorHandler'
@@ -16,13 +14,16 @@ constructor(props){
                             this.state = {
                                             username:'',
                                             password:'',
-                                            isLoggedIn:false
+                                            isLoggedIn:false,
+                                            closeAlert: false
                                          }
+                            this.userNameRef = React.createRef();
+                            this.passwordRef = React.createRef();
                    }
 
 setLoginDetails = (e) => {
-                            const field = e.target.name;
-                            const value = e.target.value;
+                            const field = this.userNameRef.current.value;
+                            const value = this.passwordRef.current.value;
                             console.log(field + ' -- '+ value);
                             this.setState(
                                             {
@@ -35,9 +36,9 @@ setLoginDetails = (e) => {
 
 login = (e) => {
                 e.preventDefault();
+                console.log(this.userNameRef.current.value + "--" +this.passwordRef.current.value);
 
-                if(this.state.username === 'admin' && this.state.password === 'admin'){
-                    alert('Login successful !!');
+                if(this.userNameRef.current.value === 'admin' && this.passwordRef.current.value === 'admin'){
                     this.setState(
                     {isLoggedIn : true}
                     );
@@ -49,54 +50,74 @@ login = (e) => {
 
               }
 
+closeAlertFunction = (e) => { this.setState({closeAlert:true})}
+
 render(){
-    if(!this.state.isLoggedIn){
-                return (
-                <React.Fragment>
-                        <div ><h3>Defect Tracker login</h3></div>
-                        <div className="form-group">
-                            <table>
-                                <tr>
-                                    <td> Username: </td><td><input type="text"
-                                                                name="username"
-                                                                placeholder='Enter username'
-                                                                onChange={this.setLoginDetails}
-                                                                className="form-control" /></td>
-                                </tr>
-                                <tr>
-                                    <td><label className="">Password:</label>
-                                    </td><td><input type="password"
-                                                    name="password"
-                                                    placeholder="Enter password"
-                                                    onChange={this.setLoginDetails}
-                                                    className="form-control"/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="button" value="Login" onClick={this.login} className="form-control btn btn-primary" /> </td>
-                                 </tr>
+    if(!this.state.isLoggedIn)
+                {
+                            return (<div className="container w-50 my-3">
 
-                            </table>
-                        </div>
-                </React.Fragment>
+                                        <div className="container px-5 py-5 bg-info border rounded">
 
-                    )
+                                        <div className="form-group">
+                                        <h3 className="text-white" >Tracker login</h3>
+
+                                                             <input type="text"
+                                                                                name="username"
+                                                                                placeholder='Enter username'
+                                                                                ref = {this.userNameRef}
+                                                                                className="form-control" />
+                                        </div>
+
+                                        <div className="form-group">
+
+                                                    <input type="password"
+                                                                    name="password"
+                                                                    placeholder="Enter password"
+                                                                    ref = {this.passwordRef}
+                                                                    className="form-control"/>
+                                        </div>
+
+                                         <div className="form-group">
+                                                  <input type="button" value="Sign in" onClick={this.login} className="form-control btn btn-success" />
+                                          </div>
+
+
+                                    </div>
+                                    </div>)
                }else{
 
-               return (
-                <React.Fragment>
-                       <ErrorHandler>
-                           <Timer/>
-                       </ErrorHandler>
+                        if(this.state.closeAlert)
+                        {
+                                       return (
+                                                <div className="bg-light mx-auto">
+                                                       <ErrorHandler>
+                                                           <Timer/>
+                                                       </ErrorHandler>
 
-                       <ErrorHandler>
-                          <PropsStateDemoComponent/>
-                       </ErrorHandler>
+                                                       <ErrorHandler>
+                                                          <PropsStateDemoComponent/>
+                                                       </ErrorHandler>
 
-                       <Parent/>
-                </React.Fragment>
+                                                       <Parent/>
+                                                </div>)
+                       }else{
+                                        return (<div className="bg-light mx-auto">
+                                                           <div className="alert alert-success alert-dismissible" >
+                                                                 <a href="#" className="close" data-dismiss="alert" aria-label="close" onClick={this.closeAlertFunction}>&times;</a>
+                                                                 Login successful !!!
+                                                           </div>
+                                                      <ErrorHandler>
+                                                          <Timer/>
+                                                      </ErrorHandler>
 
+                                                      <ErrorHandler>
+                                                         <PropsStateDemoComponent/>
+                                                      </ErrorHandler>
 
-               )
+                                                      <Parent/>
+                                                 </div>)
+                            }
                }
 
              }
