@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LoginComponent from './components/logincomponent/LoginComponent';
+import HeaderRoutes from './components/router/HeaderRoutesConfiguration'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div>
-        <LoginComponent />
+    <LoginComponent/>
     </div>
   );
 }

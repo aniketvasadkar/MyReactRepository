@@ -5,6 +5,8 @@ import Timer from '../propsstatedemo/Timer'
 import Parent from '../childtoparentdata/Parent'
 import ErrorHandler from '../errors/ErrorHandler'
 import PropsStateDemoComponent from '../propsstatedemo/PropsStateDemoComponent'
+import UseStateHookDemo from '../hooks/UseStateHookDemo'
+import HeaderRoutes from '../router/HeaderRoutesConfiguration'
 
 class LoginComponent extends Component
 {
@@ -90,32 +92,17 @@ render(){
                         if(this.state.closeAlert)
                         {
                                        return (
-                                                <div className="bg-light mx-auto">
-                                                       <ErrorHandler>
-                                                           <Timer/>
-                                                       </ErrorHandler>
-
-                                                       <ErrorHandler>
-                                                          <PropsStateDemoComponent/>
-                                                       </ErrorHandler>
-
-                                                       <Parent/>
+                                                <div className="container bg-light mx-auto">
+                                                    <HeaderRoutes/>
                                                 </div>)
                        }else{
-                                        return (<div className="bg-light mx-auto">
+                                        return (<div className="container bg-light mx-auto">
                                                            <div className="alert alert-success alert-dismissible" >
                                                                  <a href="#" className="close" data-dismiss="alert" aria-label="close" onClick={this.closeAlertFunction}>&times;</a>
                                                                  Login successful !!!
                                                            </div>
-                                                      <ErrorHandler>
-                                                          <Timer/>
-                                                      </ErrorHandler>
+                                                    <HeaderRoutes/>
 
-                                                      <ErrorHandler>
-                                                         <PropsStateDemoComponent/>
-                                                      </ErrorHandler>
-
-                                                      <Parent/>
                                                  </div>)
                             }
                }
