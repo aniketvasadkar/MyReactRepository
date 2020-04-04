@@ -1,5 +1,5 @@
 # MyReactRepository
-# Below are few usefull commands while working with react-redux & usefull imports
+# Below are few useful commands while working with react-redux & useful imports
 
 #creating brand new react app
 npx create-react-app <app-name-in-lower-case>
